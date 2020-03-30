@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Funnel</title>
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+    <style>
+            #chartdiv {
+              width: 100%;
+              height: 500px;
+            } 
+    </style>
+</head>
+<body>
+    <div id="chartdiv"></div>
+    <!-- Chart code -->
+    <script>
+    // Themes begin
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+    
+    let chart = am4core.create("chartdiv", am4charts.SlicedChart);
+    chart.data = [{
+      "name": "1",
+      "value": 8000000
+    }, {
+      "name": "2",
+      "value": 3000000
+    }, {
+      "name": "3",
+      "value": 900000
+    }, {
+      "name": "4",
+      "value": 300000
+    }, {
+      "name": "5",
+      "value": 100000
+    }, {
+      "name": "6",
+      "value": 600
+    }];
+    
+    let series = chart.series.push(new am4charts.FunnelSeries());
+    series.dataFields.value = "value";
+    series.dataFields.category = "name";
+    
+    var fillModifier = new am4core.LinearGradientModifier();
+    fillModifier.brightnesses = [-0.5, 1, -0.5];
+    fillModifier.offsets = [0, 0.5, 1];
+    series.slices.template.fillModifier = fillModifier;
+    series.alignLabels = true;
+    
+    series.labels.template.text = "{category}: [bold]{value}[/]";
+    </script>
+
+</body>
+</html>
+    
+  
+    
